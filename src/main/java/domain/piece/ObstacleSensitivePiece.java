@@ -17,15 +17,15 @@ public abstract class ObstacleSensitivePiece extends Piece {
     protected final List<Point> findMovablePoints(final Point source, final PieceVisibleBoard board) {
         return movements().stream()
                 .filter(movement -> board.canMoveByPath(source, movement.destinationPath())
-                        && !isSameTeamExistsAtDestination(source, movement.destinationPath(), board)
+                        && !isSameTeamExistsAtDestination(board.getPointMovedByPath(source, movement.destinationPath()),
+                        board)
                         && !blockedByObstacle(source, movement.obstaclePaths(), board))
                 .map(movement -> board.getPointMovedByPath(source, movement.destinationPath()))
                 .toList();
     }
 
-    private boolean isSameTeamExistsAtDestination(final Point source, final Path destinationPath,
-                                                  final PieceVisibleBoard board) {
-        return board.matchTeam(board.getPointMovedByPath(source, destinationPath), team());
+    private boolean isSameTeamExistsAtDestination(final Point destination, final PieceVisibleBoard board) {
+        return board.matchTeam(destination, team());
     }
 
     private boolean blockedByObstacle(final Point point, final List<Path> obstaclePaths,
