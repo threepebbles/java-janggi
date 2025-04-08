@@ -60,10 +60,10 @@ class GameRoomDaoTest {
         Optional<GameRoomDto> maybeGameRoom = gameRoomDao.findByName(testConnection, name);
 
         // then
-        SoftAssertions.assertSoftly(soflty -> {
-            soflty.assertThat(maybeGameRoom.isPresent()).isTrue();
-            soflty.assertThat(maybeGameRoom.get().name()).isEqualTo(name);
-            soflty.assertThat(maybeGameRoom.get().turn()).isEqualTo(turn);
+        SoftAssertions.assertSoftly(softly -> {
+            softly.assertThat(maybeGameRoom.isPresent()).isTrue();
+            softly.assertThat(maybeGameRoom.get().name()).isEqualTo(name);
+            softly.assertThat(maybeGameRoom.get().turn()).isEqualTo(turn);
         });
     }
 
